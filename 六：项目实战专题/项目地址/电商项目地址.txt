@@ -1,0 +1,3 @@
+项目课程代码外网部署访问地址：https://gitee.com/tearwind/tlmall-v5-single.git
+电商项目管理后台前端地址：https://gitee.com/tearwind/mall-admin-web
+电商项目商城前端地址：https://gitee.com/tearwind/tlmall-front
