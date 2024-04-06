@@ -1,0 +1,16 @@
+项目学习必备知识清单
+从上面的项目架构图可以看到，图灵商城项目牵涉到的知识点是非常多的，为了大家对后面课程学习的顺利进行，以下知识点需要大家在学习本项目前牢固掌握：
+并发编程
+SpringBoot + Mybatis + MySQL 下的WEB应用开发
+图灵商城项目单体版（基础较弱同学优先学习，重点）
+SpingCloudAlibaba系列组件（Nacos、Seata等等）的作用和基本使用（重点）
+Redis各种数据结构和操作、Redis主从和Redis Cluster基本概念（重点）
+Lua语言的基础语法
+MongoDB基本概念和操作、MongoDB集群基本概念
+消息中间件的基本概念和RocketMQ的基本操作、RocketMQ集群基本概念（重点）
+ELK的基本概念和基本使用
+JVM与Mysql调优
+JavaScript基础语法
+Linux的基本概念和操作
+Nginx基本概念和操作
+Git的基本操作和Maven基本配置方法和常用命令
