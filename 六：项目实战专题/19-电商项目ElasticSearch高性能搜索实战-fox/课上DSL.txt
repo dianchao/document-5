@@ -1,0 +1,164 @@
+POST product_db/_search
+{
+  "query": {
+    "bool": {
+      "must": [
+        {
+          "multi_match": {
+            "query": "手机",
+            "fields": [
+              "name",
+              "keywords",
+              "subTitle"
+            ]
+          }
+        }
+        
+      ],
+      "filter": [
+        {
+          "term": {
+            "hasStock": "true"
+          }
+        },
+        {
+          "range": {
+            "price": {
+              "gte": 2000,
+              "lte": 5000
+            }
+          }
+        },
+        {
+          "term": {
+            "brandId": 59
+          }
+        },
+        {
+          "nested": {
+            "path": "attrs",
+            "query": {
+              "bool": {
+                "must": [
+                  {
+                    "term": {
+                      "attrs.attrId": 9
+                    }
+                  },
+                  {
+                    "term": {
+                      "attrs.attrValue": "32G"
+                    }
+                  }
+                ]
+              }
+            }
+          }
+        }
+      ]
+    }
+  },
+  "aggs": {
+    "brandName_aggs": {
+      "terms": {
+        "field": "brandId",
+        "size": 50
+      }
+    }
+  }, 
+  "sort": [
+    {
+      "salecount": {
+        "order": "desc"
+      }
+    }
+  ],
+  "highlight": {
+    "fields": {
+      "*":{}
+    }
+  }
+}
+
+POST product_db/_search
+{
+  "query": {
+    "bool": {
+      "must": [
+        {
+          "multi_match": {
+            "query": "手机",
+            "fields": [
+              "name",
+              "keywords",
+              "subTitle"
+            ]
+          }
+        }
+      ],
+      "filter": [
+        {
+          "term": {
+            "hasStock": "true"
+          }
+        }
+      ]
+    }
+  },
+  "aggs": {
+    "brandId_aggs": {
+      "terms": {
+        "field": "brandId",
+        "size": 50
+      },
+      "aggs": {
+        "brandName_aggs": {
+          "terms": {
+            "field": "brandName"
+          }
+        },
+        "brandImg_aggs": {
+          "terms": {
+            "field": "brandImg"
+          }
+        }
+      }
+    },
+    "attrs_aggs": {
+      "nested": {
+        "path": "attrs"
+      },
+      "aggs": {
+        "attrId_aggs": {
+          "terms": {
+            "field": "attrs.attrId"
+          },
+          "aggs": {
+            "attrName_aggs": {
+              "terms": {
+                "field": "attrs.attrName"
+              }
+            },
+            "attrValue_aggs": {
+              "terms": {
+                "field": "attrs.attrValue"
+              }
+            }
+          }
+        }
+      }
+    }
+  },
+  "sort": [
+    {
+      "salecount": {
+        "order": "desc"
+      }
+    }
+  ],
+  "highlight": {
+    "fields": {
+      "*": {}
+    }
+  }
+}
